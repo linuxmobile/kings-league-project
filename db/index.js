@@ -3,8 +3,9 @@ import path from 'node:path'
 
 const DB_PATH = path.join(process.cwd(), './db/')
 
-export function readDBFile(dbName) {
-	return readFile(`${DB_PATH}/${dbName}.json`, 'utf-8').then(JSON.parse)
+export async function readDBFile(dbName) {
+	const text = await readFile(`${DB_PATH}/${dbName}.json`, 'utf-8')
+	return JSON.parse(text)
 }
 
 export const TEAMS = await readDBFile('teams')
